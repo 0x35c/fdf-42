@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:27:52 by ulayus            #+#    #+#             */
-/*   Updated: 2022/11/09 13:32:00 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/11/10 14:18:34 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 # define PARSING_H
 
 # include "gnl/get_next_line.h"
+# include "libft/libft.h"
 
-typedef struct s_cardinal_points
+typedef struct s_points
 {
-	int	x;
-	int	y;
-	int	alt;
-}	t_cardinal_points;
+	int				x;
+	int				y;
+	int				alt;
+	struct s_points	*next;
+}	t_points;
+t_points   *coordinates(t_points *head, int fd);
 
 #endif
