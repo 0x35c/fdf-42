@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   algo_draw.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 13:27:52 by ulayus            #+#    #+#             */
-/*   Updated: 2022/11/11 19:55:07 by ulayus           ###   ########.fr       */
+/*   Created: 2022/11/11 18:07:18 by ulayus            #+#    #+#             */
+/*   Updated: 2022/11/11 18:25:38 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "fdf.h"
 
-# include "struct.h"
-# include "gnl/get_next_line.h"
-# include "libft/libft.h"
+void	draw_line(t_points p1, t_points p2)
+{
+	float	m;
+	float	e;
 
-t_points   *coordinates(t_points *head, int fd);
-
-#endif
+	m = abs(p2.y - p1.y)/abs(p2.x - p1.x);
+	e = 0;
+	while (p1.x <= p2.x)
+	{
+		ft_mlx_pixel_put(&img, p1.x, p1.y, 0x0000FF00);
+		e-=m;
+		if (e < -0.5)
+		{
+			p1.y--;
+			e+=1.0;
+		}
+		p1.x++;
+	}
+}

@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 13:27:52 by ulayus            #+#    #+#             */
-/*   Updated: 2022/11/11 19:55:07 by ulayus           ###   ########.fr       */
+/*   Created: 2022/11/11 19:49:58 by ulayus            #+#    #+#             */
+/*   Updated: 2022/11/11 20:03:26 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#ifndef STRUCT_H
+# define STRUCT_H
 
-# include "struct.h"
-# include "gnl/get_next_line.h"
-# include "libft/libft.h"
+typedef struct s_data
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}			t_data;
 
-t_points   *coordinates(t_points *head, int fd);
+typedef struct s_points
+{
+	int				x;
+	int				y;
+	int				alt;
+	struct s_points	*next;
+}					t_points;
 
 #endif

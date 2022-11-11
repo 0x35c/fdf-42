@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_mlx.c                                         :+:      :+:    :+:   */
+/*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:32:03 by ulayus            #+#    #+#             */
-/*   Updated: 2022/11/10 17:05:34 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/11/11 20:14:41 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,14 @@ int	main(void)
 	void	*mlx;
 	void	*mlx_win;
 	t_data	img;
-	int		x;
-	int		y;
+	t_points	p1 = {80, 90, 3, NULL};
+	t_points	p2 = {30, 20, 8, NULL};
 
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "Window test...");
 	img.img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len, &img.endian);
-	x = 30;
-	y = 10;
-	while (x < 100)
-	{
-		ft_mlx_pixel_put(&img, x, y, 0x00FF0000);
-		x++;
-	}
+	draw_line_y(p1, p2, img);
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);
 }

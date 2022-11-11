@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   graphic.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 13:27:52 by ulayus            #+#    #+#             */
-/*   Updated: 2022/11/11 19:55:07 by ulayus           ###   ########.fr       */
+/*   Created: 2022/11/11 19:34:16 by ulayus            #+#    #+#             */
+/*   Updated: 2022/11/11 20:11:56 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#ifndef GRAPHIC_H
+# define GRAPHIC_H
 
 # include "struct.h"
-# include "gnl/get_next_line.h"
-# include "libft/libft.h"
+# include <math.h>
+# define WIDTH 960
+# define HEIGHT 540
+# define X 0
+# define Y 1
 
-t_points   *coordinates(t_points *head, int fd);
+void	ft_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	draw_line_x(t_points p1, t_points p2, t_data img);
+void	draw_line_y(t_points p1, t_points p2, t_data img);
 
 #endif
