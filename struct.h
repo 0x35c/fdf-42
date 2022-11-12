@@ -24,10 +24,10 @@ typedef struct s_data
 
 typedef struct s_points
 {
-	int				x;
-	int				y;
-	int				alt;
-	struct s_points	*next;
-}					t_points;
+	int	x;
+	int	y;
+	int	alt;
+	int	eol;
+}		t_points;
 
 #endif

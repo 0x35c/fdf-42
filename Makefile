@@ -12,7 +12,7 @@
 
 NAME = fdf
 
-SRC = parsing.c draw_line.c drawing.c\
+SRC = parsing.c main.c\
 	  gnl/get_next_line.c gnl/get_next_line_utils.c
 
 CC = clang

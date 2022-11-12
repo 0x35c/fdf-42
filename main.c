@@ -14,37 +14,34 @@
 
 int	main(int ac, char **av)
 {
-	t_points	*head;
-	t_points	*tmp1; 
-	t_points	*tmp2; 
+	t_points	**matrix;
 	int			y;
+	int			x;
 	int			fd;
 
-	head = NULL;
+	matrix = NULL;
 	if (ac != 2)
 		return (1);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 1)
 		return (1);
-	if (head == NULL)	
-		head = coordinates(head, fd);
+	coordinates(&matrix, fd);
 	ft_printf("Coordonnées:\n");
-	tmp1 = head;
 	y = 0;
-	while (tmp1)
+	while (matrix[y])
 	{
-		tmp2 = tmp1;
-		tmp1 = tmp1->next;
-		if (tmp2->y > y)
+		x = 0;
+		while (matrix[y][x].eol !=1)
 		{
-			ft_printf("\n");
-			y++;
+			ft_printf("%d ", matrix[y][x].alt);
+			//free(&matrix[y][x]);
+			x++;
 		}
-		ft_printf("%d ", tmp2->alt);
-		free(tmp2);
+		ft_printf("\n");
+		//free(&matrix[y]);
+		y++;
 	}
 	ft_printf("\n");
-	free(tmp1);
 	close(fd);
 	return (0);
 }

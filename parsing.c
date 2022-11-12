@@ -12,41 +12,32 @@
 
 #include "parsing.h"
 
-t_points  *ft_new_node(char *alt, int x, int y)
+t_points	*ft_new_element(char *alt, int x, int y)
 {
-    t_points  *node;
+	t_points	*node;
 
 	node = NULL;
-    node = malloc(sizeof(t_points));
-    if (node == NULL)
-	{
-        return (0);
-	}
+	node = malloc(sizeof(t_points));
 	node->alt = ft_atoi(alt);
 	node->x = x;
 	node->y = y;
-    node->next = 0;
-    return (node);
+	node->eol = 0;
+	return (node);
 }
 
-t_points    *ft_lstadd_node(t_points **first_node, t_points *new)
+t_points	**ft_alloc_y(char **split_str)
 {
-    t_points  *tmp;
+	int		i;
+	t_points	**tmp;
 
-	tmp = NULL;
-    if ((*first_node) == NULL)
-    {
-        *first_node = new;
-        return (new);
-    }
-    tmp = *first_node;
-    while (tmp->next)
-        tmp = tmp->next;
-    tmp->next = new;
-	return (new);
+	i = 0;
+	while (split_str[i])
+		i++;
+	tmp = malloc(i * sizeof(t_points *));
+	return (tmp);
 }
 
-void	ft_free_split(char **strs)
+void	ft_free(char **strs, char *str)
 {
 	int	i;
 
@@ -57,36 +48,35 @@ void	ft_free_split(char **strs)
 		i++;
 	}
 	free(strs);
+	free(str);
 }
 
-t_points	*coordinates(t_points *head, int fd)
+void	coordinates(t_points ***matrix, int fd)
 {
-	int			y;
 	char		*str;
 	char		**split_str;
-	int			x;
-	t_points	*node;
+	int		x;
+	int		y;
 
 	str = NULL;
-	node = NULL;
 	str = get_next_line(fd);
 	y = 0;
 	while (str)
 	{
 		split_str = ft_split(str, ' ');
-		free(str);
+		matrix[y] = ft_alloc_y(split_str);
 		x = 0;
 		while (split_str[x])
 		{
-			node = ft_lstadd_node(&head, ft_new_node(split_str[x], x, y));
+			matrix[y][x] = ft_new_element(split_str[x], x, y);
+			ft_printf("Coordonnées: %d %d %d\n", matrix[y][x]->x, matrix[y][x]->y, matrix[y][x]->alt);
 			x++;
 		}
-		ft_free_split(split_str);
+		matrix[y][x - 1]->eol = 1;
+		ft_free(split_str, str);
 		str = get_next_line(fd);
 		y++;
 	}
 	if (str)
 		free(str);
-	node->next = NULL;
-	return (head);
 }

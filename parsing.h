@@ -17,6 +17,6 @@
 # include "gnl/get_next_line.h"
 # include "libft/libft.h"
 
-t_points   *coordinates(t_points *head, int fd);
+void	coordinates(t_points ***matrix, int fd);
 
 #endif
