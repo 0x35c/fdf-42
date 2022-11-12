@@ -19,7 +19,7 @@ int	main(int ac, char **av)
 	int			x;
 	int			fd;
 
-	matrix = NULL;
+	//matrix = NULL;
 	if (ac != 2)
 		return (1);
 	fd = open(av[1], O_RDONLY);
@@ -28,17 +28,15 @@ int	main(int ac, char **av)
 	coordinates(&matrix, fd);
 	ft_printf("Coordonnées:\n");
 	y = 0;
-	while (matrix[y])
+	while (y < 10)
 	{
 		x = 0;
-		while (matrix[y][x].eol !=1)
+		while (x < 11)
 		{
 			ft_printf("%d ", matrix[y][x].alt);
-			//free(&matrix[y][x]);
 			x++;
 		}
 		ft_printf("\n");
-		//free(&matrix[y]);
 		y++;
 	}
 	ft_printf("\n");

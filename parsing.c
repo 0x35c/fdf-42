@@ -17,7 +17,7 @@ t_points	*ft_new_element(char *alt, int x, int y)
 	t_points	*node;
 
 	node = NULL;
-	node = malloc(sizeof(t_points));
+	node = malloc(sizeof *node);
 	node->alt = ft_atoi(alt);
 	node->x = x;
 	node->y = y;
@@ -33,7 +33,7 @@ t_points	**ft_alloc_y(char **split_str)
 	i = 0;
 	while (split_str[i])
 		i++;
-	tmp = malloc(i * sizeof(t_points *));
+	tmp = malloc(i * sizeof **tmp);
 	return (tmp);
 }
 
@@ -66,13 +66,16 @@ void	coordinates(t_points ***matrix, int fd)
 		split_str = ft_split(str, ' ');
 		matrix[y] = ft_alloc_y(split_str);
 		x = 0;
-		while (split_str[x])
+		while (split_str[x] != NULL)
 		{
 			matrix[y][x] = ft_new_element(split_str[x], x, y);
-			ft_printf("Coordonnées: %d %d %d\n", matrix[y][x]->x, matrix[y][x]->y, matrix[y][x]->alt);
+			ft_printf("%d ", matrix[y][x]->alt);
+			//ft_printf("Coordonnées: %d %d %d\n", matrix[y][x]->x, matrix[y][x]->y, matrix[y][x]->alt);
 			x++;
 		}
 		matrix[y][x - 1]->eol = 1;
+		if (matrix[y][x - 1]->eol == 1)
+			ft_printf("\n");
 		ft_free(split_str, str);
 		str = get_next_line(fd);
 		y++;
