@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 00:10:23 by ulayus            #+#    #+#             */
-/*   Updated: 2022/10/25 16:04:39 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/11/13 22:18:53 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isdigit(int c);
 size_t	ft_strlen(const char *s);
+size_t	ft_strlen_2d(char **s);
 int		ft_isprint(int c);
 void	ft_bzero(void *s, unsigned int n);
 char	*ft_itoa(int n);
@@ -37,6 +38,7 @@ char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	**ft_strjoin_2d(char **s1, char **s2);
 char	*ft_strjoin_c(char *s1, char c);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);

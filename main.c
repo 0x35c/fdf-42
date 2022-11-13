@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:51:40 by ulayus            #+#    #+#             */
-/*   Updated: 2022/11/10 15:51:23 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/11/13 22:22:41 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 int	main(int ac, char **av)
 {
-	t_points	**matrix;
-	int			y;
-	int			x;
-	int			fd;
+	char	**points;
+	int		y;
+	int		x;
+	int		fd;
 
-	//matrix = NULL;
+	points = NULL;
 	if (ac != 2)
 		return (1);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 1)
 		return (1);
-	coordinates(&matrix, fd);
+	points = coordinates(fd);
 	ft_printf("Coordonnées:\n");
 	y = 0;
-	while (y < 10)
+	while (points[y] != NULL)
 	{
 		x = 0;
-		while (x < 11)
+		while (points[y][x] != '\0')
 		{
-			ft_printf("%d ", matrix[y][x].alt);
+			ft_printf("%d ", ft_atoi((const char *)&points[y][x]));
 			x++;
 		}
 		ft_printf("\n");
