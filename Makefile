@@ -17,7 +17,7 @@ SRC = parsing.c main.c\
 
 CC = clang
 
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -g #-Wall -Wextra -Werror
 
 LIBS = -Llibft -lft -Llibft/printf -lftprintf
 OBJ = $(SRC:.c=.o)
