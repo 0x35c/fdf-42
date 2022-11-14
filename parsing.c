@@ -34,8 +34,6 @@ char    **ft_strjoin_2d(char **s1, char **s2)
     int     j;
     char    **str;
 
-    if (!s2)
-        return (NULL);
     str = ft_calloc(ft_strlen_2d(s1) + ft_strlen_2d(s2) + 1, sizeof(char **));
     if (!str)
         return (NULL);
@@ -86,7 +84,8 @@ char	**coordinates(int fd)
 	while (str)
 	{
 		split_str = ft_split(str, ' ');
-		points = ft_strjoin_2d(points, split_str);
+		if (split_str)
+			points = ft_strjoin_2d(points, split_str);
 		/*while (points[i])
 		{
 			ft_printf("%s ", points[i]);
