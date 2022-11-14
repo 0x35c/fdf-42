@@ -23,15 +23,3 @@ size_t	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
-
-size_t	ft_strlen_2d(char **s)
-{
-	size_t	i;
-
-	if (!s)
-		return (0);
-	i = 0;
-	while (s[i] != NULL)
-		i++;
-	return (i);
-}

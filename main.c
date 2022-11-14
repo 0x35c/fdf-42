@@ -26,19 +26,19 @@ int	main(int ac, char **av)
 	if (fd < 1)
 		return (1);
 	points = coordinates(fd);
-	ft_printf("Coordonnées:\n");
-	y = 0;
-	while (points[y] != NULL)
+	x = 0;
+	while (points[x] != NULL || points[x + 1] != NULL)
 	{
-		x = 0;
-		while (points[y][x] != '\0')
+		if (points[x] == NULL)
+			ft_printf("\n");
+		else
 		{
-			ft_printf("%d ", ft_atoi((const char *)&points[y][x]));
-			x++;
+			ft_printf("%d ", ft_atoi(points[x]));
+			free(points[x]);
 		}
-		ft_printf("\n");
-		y++;
+		x++;
 	}
+	free(points);
 	ft_printf("\n");
 	close(fd);
 	return (0);

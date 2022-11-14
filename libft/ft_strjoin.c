@@ -33,32 +33,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	str[j] = 0;
 	return (str);
 }
-
-char	**ft_strjoin_2d(char **s1, char **s2)
-{
-	int		i;
-	int		j;
-	char	**str;
-
-	if (!s2)
-		return (0);
-	str = malloc(sizeof(char **) * (ft_strlen_2d(s1) + ft_strlen_2d(s2) + 1));
-	if (!str)
-		return (NULL);
-	i = -1;
-	j = 0;
-	while (s1 && s1[i++])
-	{
-		str[j] = ft_strdup(s1[i]);
-		j++;
-	}
-	free(s1);
-	i = -1;
-	while (*s2 && s2[i++])
-	{
-		str[j] = ft_strdup(s2[i]);
-		j++;
-	}
-	str[j] = NULL;
-	return (str);
-}
