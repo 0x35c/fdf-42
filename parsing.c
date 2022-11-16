@@ -6,58 +6,48 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:29:58 by ulayus            #+#    #+#             */
-/*   Updated: 2022/11/13 22:43:49 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/11/10 15:46:38 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-size_t  ft_strlen_2d(char **s)
+t_points  *ft_new_node(char *alt, int x, int y)
 {
-    size_t  i;
+    t_points  *node;
 
-    if (!s)
-        return (0);
-    i = 0;
-	while (s[i] != NULL)
+	node = NULL;
+    node = malloc(sizeof(t_points));
+    if (node == NULL)
 	{
-		while (s[i] != NULL)
-			i++;
-		i++;
+        return (0);
 	}
-    return (i);
+	node->alt = ft_atoi(alt);
+	node->x = x;
+	node->y = y;
+	node->eol = 0;
+    node->next = 0;
+    return (node);
 }
 
-char    **ft_strjoin_2d(char **s1, char **s2)
+t_points    *ft_lstadd_node(t_points **first_node, t_points *new)
 {
-    int     i;
-    int     j;
-    char    **str;
+    t_points  *tmp;
 
-    str = ft_calloc(ft_strlen_2d(s1) + ft_strlen_2d(s2) + 1, sizeof(char **));
-    if (!str)
-        return (NULL);
-    i = -1;
-    j = 0;
-    while (s1 && (s1[++i] != NULL || s1[i + 1] != NULL))
+	tmp = NULL;
+    if ((*first_node) == NULL)
     {
-        str[j] = ft_strdup(s1[i]);
-		free(s1[i]);
-        j++;
+        *first_node = new;
+        return (new);
     }
-	if (s1)
-		j++;
-	free(s1);
-    i = -1;
-    while (s2[++i] != NULL)
-    {
-        str[j] = ft_strdup(s2[i]);
-        j++;
-    }
-    return (str);
+    tmp = *first_node;
+    while (tmp->next)
+        tmp = tmp->next;
+    tmp->next = new;
+	return (new);
 }
 
-void	ft_free(char **strs, char *str)
+void	ft_free_split(char **strs)
 {
 	int	i;
 
@@ -68,35 +58,37 @@ void	ft_free(char **strs, char *str)
 		i++;
 	}
 	free(strs);
-	free(str);
 }
 
-char	**coordinates(int fd)
+t_points	*coordinates(t_points *head, int fd)
 {
-	char	*str;
-	char	**split_str;
-	char	**points;
-	//int		i = 0;
+	int			y;
+	char		*str;
+	char		**split_str;
+	int			x;
+	t_points	*node;
 
 	str = NULL;
-	points = NULL;
+	node = NULL;
 	str = get_next_line(fd);
+	y = 0;
 	while (str)
 	{
 		split_str = ft_split(str, ' ');
-		if (split_str)
-			points = ft_strjoin_2d(points, split_str);
-		/*while (points[i])
+		free(str);
+		x = 0;
+		while (split_str[x])
 		{
-			ft_printf("%s ", points[i]);
-			i++;
+			node = ft_lstadd_node(&head, ft_new_node(split_str[x], x, y));
+			x++;
 		}
-		ft_printf("\n");
-		i++;*/
-		ft_free(split_str, str);
+		ft_free_split(split_str);
 		str = get_next_line(fd);
+		node->eol = 1;
+		y++;
 	}
 	if (str)
 		free(str);
-	return (points);
+	node->next = NULL;
+	return (head);
 }

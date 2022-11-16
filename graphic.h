@@ -20,8 +20,9 @@
 # define X 0
 # define Y 1
 
+int		ft_abs(int n);
 void	ft_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	draw_line_x(t_points p1, t_points p2, t_data img);
-void	draw_line_y(t_points p1, t_points p2, t_data img);
+void	draw_line_x(t_points *p1, t_points *p2, t_data img);
+void	draw_line_y(t_points *p1, t_points *p2, t_data img);
 
 #endif

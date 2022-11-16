@@ -12,12 +12,12 @@
 
 NAME = fdf
 
-SRC = parsing.c main.c\
+SRC = drawing.c draw_line.c parsing.c\
 	  gnl/get_next_line.c gnl/get_next_line_utils.c
 
 CC = clang
 
-CFLAGS = -g #-Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 
 LIBS = -Llibft -lft -Llibft/printf -lftprintf
 OBJ = $(SRC:.c=.o)

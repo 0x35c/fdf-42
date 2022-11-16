@@ -80,14 +80,14 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (0);
-	strs = ft_calloc(count_word(s, c) + 1, sizeof(char *));
+	strs = malloc(sizeof(char *) * (count_word(s, c) + 1));
 	if (strs == NULL)
 		return (0);
 	i = 0;
 	j = 0;
 	while (s[i] && (j < count_word(s, c) + 1 && count_word(s, c)))
 	{
-		strs[j] = ft_calloc(count_char(s, c, i) + 1, 1);
+		strs[j] = malloc(count_char(s, c, i) + 1);
 		if (!strs[j])
 			return (0);
 		i = ft_strccpy(s, strs[j], c, i);

@@ -23,30 +23,23 @@ int	ft_abs(int n)
  *--- Bresenham algorithm for x1 < x2---*
  ***************************************/
 
-void	draw_line_x(t_points p1, t_points p2, t_data img)
+void	draw_line_x(t_points *p1, t_points *p2, t_data img)
 {
 	int	dx;
 	int	dy;
 	int	e;
-	int		ind[2];
 
-	e = ft_abs(p2.x - p1.x);
+	e = ft_abs(p2->x - p1->x);
 	dx = 2 * e;
-	dy = 2 * ft_abs(p2.y - p1.y);
-	ind[X] = 1;
-	ind[Y] = 1;
-	if (p1.x > p2.x)
-		ind[X] = -1;
-	if (p1.y > p2.y)
-		ind[Y] = -1;
-	while (p1.x <= p2.x)
+	dy = 2 * ft_abs(p2->y - p1->y);
+	while (p1->x <= p2->x)
 	{
-		ft_mlx_pixel_put(&img, p1.x, p1.y, 0x000000ff + (0x00ff0000 - (0x00ff0000 * p2.alt * 20)));
-		p1.x += ind[X];
+		ft_mlx_pixel_put(&img, p1->x + 80, p1->y + 50, 0x000000ff + (0x00ff0000 - (0x00ff0000 * p2->alt * 20)));
+		p1->x++;
 		e -= dy;
 		if (e < 0)
 		{
-			p1.y += ind[Y];
+			p1->y++;
 			e += dx;
 		}
 	}
@@ -56,31 +49,24 @@ void	draw_line_x(t_points p1, t_points p2, t_data img)
  *--- Bresenham algorithm for y1 < y2---*
  ***************************************/
 
-void	draw_line_y(t_points p1, t_points p2, t_data img)
+void	draw_line_y(t_points *p1, t_points *p2, t_data img)
 {
 	int	dx;
 	int	dy;
 	int	e;
-	int	ind[2];
 
-	e = ft_abs(p2.x - p1.x);
+	e = ft_abs(p2->y - p1->y);
 	dx = 2 * e;
-	dy = 2 * ft_abs(p2.y - p1.y);
-	ind[X] = 1;
-	ind[Y] = 1;
-	if (p1.x > p2.x)
-		ind[X] = -1;
-	if (p1.y > p2.y)
-		ind[Y] = -1;
-	while (p1.x >= p2.x)
+	dy = 2 * ft_abs(p2->y - p1->y);
+	while (p1->y <= p2->y)
 	{
-		ft_mlx_pixel_put(&img, p1.x, p1.y, 0x000000ff + (0x00ff0000 - (0x00ff0000 * p2.alt * 20)));
-		p1.x += ind[X];
-		e -= dy;
-		if (e < 0)
+		ft_mlx_pixel_put(&img, p1->x + 80, p1->y + 50, 0x000000ff + (0x00ff0000 - (0x00ff0000 * p2->alt * 20)));
+		p1->y++;
+		e -= dx;
+		if (e > 0)
 		{
-			p1.y += ind[Y];
-			e += dx;
+			p1->x++;
+			e += dy;
 		}
 	}
 }

@@ -19,6 +19,5 @@
 # include "parsing.h"
 # include "graphic.h"
 # include <fcntl.h>
-# include <stdio.h>
 
 #endif
