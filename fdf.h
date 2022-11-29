@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:53:50 by ulayus            #+#    #+#             */
-/*   Updated: 2022/11/11 19:58:43 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/11/29 17:15:47 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@
 # include "parsing.h"
 # include "graphic.h"
 # include <fcntl.h>
+# include <limits.h>
 
 #endif

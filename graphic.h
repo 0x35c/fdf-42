@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 19:34:16 by ulayus            #+#    #+#             */
-/*   Updated: 2022/11/11 20:11:56 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/11/29 17:23:02 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 
 int		ft_abs(int n);
 void	ft_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	draw_line_x(t_points *p1, t_points *p2, t_data img);
-void	draw_line_y(t_points *p1, t_points *p2, t_data img);
+void	draw_lines(t_points *p1, t_points *p2, t_mlx *win);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:51:40 by ulayus            #+#    #+#             */
-/*   Updated: 2022/11/10 15:51:23 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/11/29 17:01:32 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	main(int ac, char **av)
 {
 	t_points	*head;
-	t_points	*tmp1; 
-	t_points	*tmp2; 
+	t_points	*tmp1;
+	t_points	*tmp2;
 	int			y;
 	int			fd;
 
@@ -26,7 +26,7 @@ int	main(int ac, char **av)
 	fd = open(av[1], O_RDONLY);
 	if (fd < 1)
 		return (1);
-	if (head == NULL)	
+	if (head == NULL)
 		head = coordinates(head, fd);
 	ft_printf("Coordonnées:\n");
 	tmp1 = head;

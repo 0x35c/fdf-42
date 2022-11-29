@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 19:49:58 by ulayus            #+#    #+#             */
-/*   Updated: 2022/11/11 20:03:26 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/11/29 17:13:58 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,28 @@ typedef struct s_points
 	int				eol;
 	struct s_points	*next;
 }					t_points;
+
+typedef struct s_bresenham
+{
+	int	x1;
+	int	x2;
+	int	y1;
+	int	y2;
+	int	ex;
+	int	ey;
+	int	dx;
+	int	dy;
+	int	ref_dx;
+	int	ref_dy;
+	int	x_incr;
+	int	y_incr;
+}		t_bresenham;
+
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*mlx_win;
+	t_data	img;
+}			t_mlx;
 
 #endif
