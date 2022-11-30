@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 19:49:58 by ulayus            #+#    #+#             */
-/*   Updated: 2022/11/29 17:13:58 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/11/30 16:45:34 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,18 @@ typedef struct s_data
 	int		endian;
 }			t_data;
 
+typedef struct s_map
+{
+	int	nb_points;
+	int	nb_columns;
+	int	nb_lines;
+}		t_map;
+
 typedef struct s_points
 {
 	int				x;
 	int				y;
-	int				alt;
+	int				z;
 	int				eol;
 	struct s_points	*next;
 }					t_points;

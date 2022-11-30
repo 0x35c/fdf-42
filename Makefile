@@ -6,37 +6,33 @@
 #    By: ulayus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/30 11:40:22 by ulayus            #+#    #+#              #
-#    Updated: 2022/11/11 19:47:21 by ulayus           ###   ########.fr        #
+#    Updated: 2022/11/30 18:30:04 by ulayus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SRC = drawing.c draw_line.c parsing.c\
+SRC = drawing.c draw_line.c parsing.c info.c utils.c\
 	  gnl/get_next_line.c gnl/get_next_line_utils.c
 
 CC = clang
 
 CFLAGS = -g -Wall -Wextra -Werror
-
 LIBS = -Llibft -lft -Llibft/printf -lftprintf
+
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+
 OBJ = $(SRC:.c=.o)
 
 all: ${NAME}
 
 MLX = -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
-makemlx:
-	make re -C ./minilibx-linux
-
-makelibft:
-	make re -C ./libft
-
-${NAME}: makemlx makelibft ${OBJ}
-	$(CC) -o ${NAME} $(OBJ) $(MLX) $(LIBS)
-
-.c.o:
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+${NAME}: ${OBJ}
+	make -C ./libft
+	make -C ./minilibx-linux
+	$(CC) ${OBJ} -o ${NAME} $(MLX) $(LIBS)
 
 clean:
 	@rm -f $(OBJ)

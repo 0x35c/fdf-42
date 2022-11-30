@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:32:03 by ulayus            #+#    #+#             */
-/*   Updated: 2022/11/29 18:25:28 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/11/30 18:22:30 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,90 +20,56 @@ void	ft_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dest = color;
 }
 
-void	convert_points(t_points *p, int x, int y)
+t_points	*parse(t_map info, int ac, char **av)
 {
-	p->x = (x - p->alt) / sqrt(2) * 10;
-	p->y = (x + 2 * y + p->alt) / sqrt(6) * 10;
-}
-
-t_points	*parse(int ac, char **av)
-{
-	t_points	*head;
+	t_points	*points;
 	int			fd;
 
-	head = NULL;
 	if (ac != 2)
 		return (NULL);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 1)
 		return (NULL);
-	head = coordinates(head, fd);
+	points = ft_calloc(sizeof(t_points), info.nb_points);
+	if (points == NULL)
+		return (NULL);
+	coordinates(points, info, fd);
 	close(fd);
-	return (head);
+	return (points);
 }
 
 int	main(int ac, char **av)
 {
-	t_mlx			*win;
-	const t_points	*head = parse(ac, av);
-	t_points		*tmp;
-	t_points		*point;
-	int				x;
-	int				y;
+	t_map		info;
+	t_points	*points;
+	t_mlx		win;
+	int			fd;
+	int			i;
 
-	win = ft_calloc(sizeof(t_mlx), 1);
-	if (!win || !head)
+	fd = open(av[1], O_RDONLY);
+	if (fd < 1)
 		return (1);
-	tmp = NULL;
-	win->mlx = mlx_init();
-	win->mlx_win = mlx_new_window(win->mlx, WIDTH, HEIGHT, "Window test...");
-	win->img.img = mlx_new_image(win->mlx, WIDTH, HEIGHT);
-	win->img.addr = mlx_get_data_addr(win->img.img, &(win->img.bpp),
-			&(win->img.line_len), &(win->img.endian));
-	tmp = (t_points *)head;
-	y = 0;
-	x = 0;
-	while (tmp->next)
+	info = info_mapping(fd);
+	close(fd);
+	points = parse(info, ac, av);
+	if (points == NULL)
+		return (1);
+	win.mlx = mlx_init();
+	win.mlx_win = mlx_new_window(win.mlx, WIDTH, HEIGHT, "|-_WiReFrAmE_-|");
+	win.img.img = mlx_new_image(win.mlx, WIDTH, HEIGHT);
+	win.img.addr = mlx_get_data_addr(win.img.img, &(win.img.bpp),
+			&(win.img.line_len), &(win.img.endian));
+	i = 0;
+	while (i + 1 < info.nb_points)
 	{
-		point = tmp;
-		if (!point->eol)
-		{
-			convert_points(point, x, y);
-			convert_points(point->next, x + 1, y);
-			draw_lines(point, point->next, win);
-			x++;
-		}
-		else
-		{
-			ft_printf("Line %d\n", y + 1);
-			x = 0;
-			y++;
-		}
-		tmp = tmp->next;
+		if ((i + 1) % info.nb_columns < info.nb_columns && (i + 1) % info.nb_columns)
+			draw_lines(points[i], points[i + 1], win);
+		if (i + info.nb_columns < info.nb_points)
+			draw_lines(points[i], points[i + info.nb_columns], win);
+		i++;
 	}
-	tmp = (t_points *)head;
-	y = 0;
-	x = 0;
-	while (tmp->next)
-	{
-		point = tmp;
-		if (!point->eol)
-		{
-			convert_points(point, x, y);
-			convert_points(point->next, x, y + 1);
-			draw_lines(point, point->next, win);
-			x++;
-			free(point);
-		}
-		else
-		{
-			ft_printf("Line %d\n", y + 1);
-			x = 0;
-			y++;
-		}
-		tmp = tmp->next;
-	}
-	free(tmp);
-	mlx_put_image_to_window(win->mlx, win->mlx_win, win->img.img, 0, 0);
-	mlx_loop(win->mlx);
+	mlx_put_image_to_window(win.mlx, win.mlx_win, win.img.img, 0, 0);
+	mlx_loop(win.mlx);
+	close(fd);
+	return (0);
 }

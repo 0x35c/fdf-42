@@ -6,30 +6,23 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:07:18 by ulayus            #+#    #+#             */
-/*   Updated: 2022/11/29 18:19:20 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/11/30 18:34:30 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	ft_abs(int n)
-{
-	if (n < 0 && n >= INT_MIN)
-		return (-n);
-	return (n);
-}
-
-t_bresenham	*init_values(t_points *p1, t_points *p2)
+t_bresenham	*init_values(t_points p1, t_points p2)
 {
 	t_bresenham	*data;
 
 	data = ft_calloc(sizeof(t_bresenham), 1);
 	if (!data)
 		return (NULL);
-	data->x1 = p1->x;
-	data->y1 = p1->y;
-	data->x2 = p2->x;
-	data->y2 = p2->y;
+	data->x1 = p1.x;
+	data->y1 = p1.y;
+	data->x2 = p2.x;
+	data->y2 = p2.y;
 	data->ex = ft_abs(data->x2 - data->x1);
 	data->ey = ft_abs(data->y2 - data->y1);
 	data->dx = 2 * data->ex;
@@ -45,14 +38,15 @@ t_bresenham	*init_values(t_points *p1, t_points *p2)
 	return (data);
 }
 
-void	bresenham_1(t_bresenham *data, t_mlx *win, int color)
+void	bresenham_1(t_bresenham *data, t_mlx win, int color)
 {
 	int	i;
 
 	i = 0;
 	while (i <= data->ref_dx)
 	{
-		ft_mlx_pixel_put(&(win->img), data->x1 + 50, data->y1 + 50, color);
+		if (pixel_in_win(data))
+			ft_mlx_pixel_put(&(win.img), data->x1, data->y1, color);
 		i++;
 		data->x1 += data->x_incr;
 		data->ex -= data->dy;
@@ -64,14 +58,15 @@ void	bresenham_1(t_bresenham *data, t_mlx *win, int color)
 	}
 }
 
-void	bresenham_2(t_bresenham *data, t_mlx *win, int color)
+void	bresenham_2(t_bresenham *data, t_mlx win, int color)
 {
 	int	i;
 
 	i = 0;
 	while (i <= data->ref_dy)
 	{
-		ft_mlx_pixel_put(&(win->img), data->x1 + 50, data->y1 + 50, color);
+		if (pixel_in_win(data))
+			ft_mlx_pixel_put(&(win.img), data->x1, data->y1, color);
 		i++;
 		data->y1 += data->y_incr;
 		data->ey -= data->dx;
@@ -83,12 +78,12 @@ void	bresenham_2(t_bresenham *data, t_mlx *win, int color)
 	}
 }
 
-void	draw_lines(t_points *p1, t_points *p2, t_mlx *win)
+void	draw_lines(t_points p1, t_points p2, t_mlx win)
 {
 	t_bresenham	*data;
 	int			color;
 
-	color = 0x000000ff + (0x00ff0000 - (0x00ff0000 * p2->alt * 20));
+	color = 0x000000ff + (0x00ff0000 - (0x00ff0000 * p2.z * 20));
 	data = init_values(p1, p2);
 	if (!data)
 		return ;

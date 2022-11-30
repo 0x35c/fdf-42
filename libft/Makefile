@@ -6,7 +6,7 @@
 #    By: ulayus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/30 11:40:22 by ulayus            #+#    #+#              #
-#    Updated: 2022/11/09 14:01:56 by ulayus           ###   ########.fr        #
+#    Updated: 2022/11/30 13:27:10 by ulayus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,8 @@ BOBJ = $(BSRCS:.c=.o)
 
 all: $(NAME) 
 
-makeprintf:
-	make re -C ./printf
-
-$(NAME): makeprintf $(OBJ)
+$(NAME): $(OBJ)
+	make -C ./printf
 	ar rc $(NAME) $(OBJ)
 
 bonus: $(OBJ) $(BOBJ)

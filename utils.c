@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 13:53:50 by ulayus            #+#    #+#             */
-/*   Updated: 2022/11/30 18:27:43 by ulayus           ###   ########.fr       */
+/*   Created: 2022/11/30 18:24:41 by ulayus            #+#    #+#             */
+/*   Updated: 2022/11/30 18:32:55 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "utils.h"
 
-# include "minilibx-linux/mlx.h"
-# include "libft/libft.h"
-# include "parsing.h"
-# include "graphic.h"
-# include <fcntl.h>
-# include <limits.h>
+int	pixel_in_win(t_bresenham *data)
+{
+	if (data->x1 > WIDTH || data->y1 > HEIGHT)
+		return (0);
+	return (1);
+}
 
-#endif
+int	ft_abs(int n)
+{
+	if (n < 0 && n >= INT_MIN)
+		return (-n);
+	return (n);
+}

@@ -1,59 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   info.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:29:58 by ulayus            #+#    #+#             */
-/*   Updated: 2022/11/30 18:33:58 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/11/30 16:51:58 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void	ft_new_point(t_points *point, char *z, int x, int y)
+t_map	info_mapping(int fd)
 {
-	point->z = ft_atoi(z);
-	point->x = ((x * 10 - y * 10) * cos(0.7)) + WIDTH / 4;
-	point->y = ((x * 10 + y * 10) * sin(0.7) - point->z) + HEIGHT / 4;
-}
+	t_map	info_map;
+	char	*str;
+	char	**split_str;
+	int		i;
 
-void	ft_free_split(char **strs)
-{
-	int	i;
-
-	i = 0;
-	while (strs[i])
-	{
-		free(strs[i]);
-		i++;
-	}
-	free(strs);
-}
-
-void	coordinates(t_points *points, t_map info, int fd)
-{
-	char		*str;
-	char		**split_str;
-	int			y;
-	int			x;
-
+	info_map.nb_points = 0;
+	info_map.nb_lines = 1;
 	str = NULL;
 	str = get_next_line(fd);
-	y = 0;
-	while (str)
+	while (str != NULL)
 	{
 		split_str = ft_split(str, ' ');
 		free(str);
-		x = 0;
-		while (split_str[x])
+		i = 0;
+		while (split_str[i])
 		{
-			ft_new_point(&points[x + y * info.nb_columns], split_str[x], x, y);
-			x++;
+			info_map.nb_columns = i + 1;
+			i++;
 		}
+		info_map.nb_lines++;
+		info_map.nb_points += info_map.nb_columns;
 		ft_free_split(split_str);
 		str = get_next_line(fd);
-		y++;
 	}
+	close(fd);
+	return (info_map);
 }
