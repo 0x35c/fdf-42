@@ -6,13 +6,13 @@
 #    By: ulayus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/30 11:40:22 by ulayus            #+#    #+#              #
-#    Updated: 2022/11/30 18:30:04 by ulayus           ###   ########.fr        #
+#    Updated: 2022/12/02 16:25:59 by ulayus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SRC = drawing.c draw_line.c parsing.c info.c utils.c\
+SRC = main.c drawing.c parsing.c info.c utils.c\
 	  gnl/get_next_line.c gnl/get_next_line_utils.c
 
 CC = clang

@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:07:18 by ulayus            #+#    #+#             */
-/*   Updated: 2022/11/30 18:34:30 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/02 16:52:32 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	draw_lines(t_points p1, t_points p2, t_mlx win)
 	t_bresenham	*data;
 	int			color;
 
-	color = 0x000000ff + (0x00ff0000 - (0x00ff0000 * p2.z * 20));
+	color = 0x0000ff + (0xff0000 - (0xff0000 * p2.z * 20));
 	data = init_values(p1, p2);
 	if (!data)
 		return ;
@@ -91,4 +91,23 @@ void	draw_lines(t_points p1, t_points p2, t_mlx win)
 		bresenham_1(data, win, color);
 	else
 		bresenham_2(data, win, color);
+	free(data);
+}
+
+void	draw_grid(t_mlx *mlx, t_map info, t_points *points)
+{
+	int	i;
+
+	i = 0;
+	while (i + 1 < info.nb_points)
+	{
+		if ((i + 1) % info.nb_columns < info.nb_columns
+			&& (i + 1) % info.nb_columns)
+			draw_lines(points[i], points[i + 1], *mlx);
+		if (i + info.nb_columns < info.nb_points)
+			draw_lines(points[i], points[i + info.nb_columns], *mlx);
+		i++;
+	}
+	free(points);
+	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img.img, 0, 0);
 }

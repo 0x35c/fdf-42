@@ -5,46 +5,91 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 13:51:40 by ulayus            #+#    #+#             */
-/*   Updated: 2022/11/29 17:01:32 by ulayus           ###   ########.fr       */
+/*   Created: 2022/11/10 16:32:03 by ulayus            #+#    #+#             */
+/*   Updated: 2022/12/02 17:52:17 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	main(int ac, char **av)
+t_points	*parse(t_map info, int ac, char **av)
 {
-	t_points	*head;
-	t_points	*tmp1;
-	t_points	*tmp2;
-	int			y;
+	t_points	*points;
 	int			fd;
 
-	head = NULL;
 	if (ac != 2)
-		return (1);
+		return (NULL);
+	fd = open(av[1], O_RDONLY);
+	if (fd < 1)
+		return (NULL);
+	points = ft_calloc(sizeof(t_points), info.nb_points);
+	if (points == NULL)
+		return (NULL);
+	coordinates(points, info, fd);
+	close(fd);
+	return (points);
+}
+
+t_mlx	*win_init(void)
+{
+	t_mlx	*mlx;
+
+	mlx = malloc(sizeof(t_mlx));
+	if (mlx == NULL)
+		return (NULL);
+	mlx->mlx = mlx_init();
+	if (mlx->mlx == NULL)
+		return (NULL);
+	mlx->mlx_win = mlx_new_window(mlx->mlx, WIDTH, HEIGHT, "|-_WiReFrAmE_-|");
+	mlx->img.img = mlx_new_image(mlx->mlx, WIDTH, HEIGHT);
+	if (mlx->mlx_win == NULL || mlx->img.img == NULL)
+		return (NULL);
+	mlx->img.addr = mlx_get_data_addr(mlx->img.img, &(mlx->img.bpp),
+			&(mlx->img.line_len), &(mlx->img.endian));
+	if (mlx->img.addr == NULL)
+		return (NULL);
+	return (mlx);
+}
+
+int	destroy_win(t_mlx *mlx)
+{
+	mlx_loop_end(mlx->mlx);
+	mlx_destroy_image(mlx->mlx, mlx->img.img);
+	mlx_destroy_window(mlx->mlx, mlx->mlx_win);
+	mlx_destroy_display(mlx->mlx);
+	free(mlx->mlx);
+	free(mlx);
+	exit (0);
+}
+
+int	handle_key(int key, t_mlx *mlx)
+{
+	if (key == XK_Escape)
+		destroy_win(mlx);
+	return (0);
+}
+
+int	main(int ac, char **av)
+{
+	t_map		info;
+	t_points	*points;
+	t_mlx		*mlx;
+	int			fd;
+
 	fd = open(av[1], O_RDONLY);
 	if (fd < 1)
 		return (1);
-	if (head == NULL)
-		head = coordinates(head, fd);
-	ft_printf("Coordonnées:\n");
-	tmp1 = head;
-	y = 0;
-	while (tmp1)
-	{
-		tmp2 = tmp1;
-		tmp1 = tmp1->next;
-		if (tmp2->y > y)
-		{
-			ft_printf("\n");
-			y++;
-		}
-		ft_printf("%d ", tmp2->alt);
-		free(tmp2);
-	}
-	ft_printf("\n");
-	free(tmp1);
+	info = info_mapping(fd);
 	close(fd);
+	points = parse(info, ac, av);
+	close(fd);
+	if (points == NULL)
+		return (1);
+	mlx = win_init();
+	draw_grid(mlx, info, points);
+	mlx_hook(mlx->mlx_win, KeyPress, KeyPressMask, &handle_key, mlx);
+	mlx_hook(mlx->mlx_win, DestroyNotify, StructureNotifyMask,
+		&destroy_win, mlx);
+	mlx_loop(mlx->mlx);
 	return (0);
 }
