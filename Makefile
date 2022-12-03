@@ -6,7 +6,7 @@
 #    By: ulayus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/30 11:40:22 by ulayus            #+#    #+#              #
-#    Updated: 2022/12/03 14:45:48 by ulayus           ###   ########.fr        #
+#    Updated: 2022/12/03 16:12:27 by ulayus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC = main.c drawing.c parsing.c info.c utils.c\
 
 CC = clang
 
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 LIBS = -Llibft -lft -Llibft/printf -lftprintf
 
 .c.o:
