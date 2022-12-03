@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:32:03 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/02 17:52:17 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/03 14:45:15 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	main(int ac, char **av)
 		return (1);
 	mlx = win_init();
 	draw_grid(mlx, info, points);
-	mlx_hook(mlx->mlx_win, KeyPress, KeyPressMask, &handle_key, mlx);
+	mlx_hook(mlx->mlx_win, KeyRelease, KeyReleaseMask, &handle_key, mlx);
 	mlx_hook(mlx->mlx_win, DestroyNotify, StructureNotifyMask,
 		&destroy_win, mlx);
 	mlx_loop(mlx->mlx);

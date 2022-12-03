@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:29:58 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/02 17:48:10 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/03 14:50:15 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_new_point(t_points *point, char *z, int x, int y)
 {
-	point->z = ft_atoi(z);
-	point->x = ((x * 1 - y * 1) * cos(0.7)) + WIDTH / 2;
-	point->y = ((x * 1 + y * 1) * sin(0.7) - point->z) + 100;
+	point->z = ft_atoi(z) * 0.8;
+	point->x = ((x * 15 - y * 15) * cos(0.6)) + WIDTH / 2;
+	point->y = ((x * 15 + y * 15) * sin(0.6) - point->z) + 100;
 }
 
 void	ft_free_split(char **strs)

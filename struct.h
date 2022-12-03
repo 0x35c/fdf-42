@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 19:49:58 by ulayus            #+#    #+#             */
-/*   Updated: 2022/11/30 16:45:34 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/03 15:00:04 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_points
 {
 	int				x;
 	int				y;
+	int				x_c;
+	int				y_c;
 	int				z;
 	int				eol;
 	struct s_points	*next;

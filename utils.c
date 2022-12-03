@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:24:41 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/02 15:59:59 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/03 14:59:32 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	pixel_in_win(t_bresenham *data)
 {
-	if (data->x1 > WIDTH || data->y1 > HEIGHT)
+	if (data->x1 > WIDTH || data->y1 > HEIGHT
+		|| data->x1 < 0 || data->y1 < 0)
 		return (0);
 	return (1);
 }
