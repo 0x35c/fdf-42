@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:27:52 by ulayus            #+#    #+#             */
-/*   Updated: 2022/11/30 18:34:56 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/04 14:04:03 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "gnl/get_next_line.h"
 # include "libft/libft.h"
 # include <math.h>
+# define ZOOM 1
+# define ALT_OFFSET 0.6
 
 void	coordinates(t_points *points, t_map info, int fd);
 void	ft_free_split(char **strs);
