@@ -6,22 +6,20 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:32:03 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/03 16:14:42 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/06 10:42:57 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_points	*parse(t_map info, int ac, char **av)
+t_points	*parse(t_map info, char **av)
 {
 	t_points	*points;
 	int			fd;
 
-	if (ac != 2)
-		return (NULL);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 1)
-		return (NULL);
+		ft_exit_error(INVALID_FILE);
 	points = ft_calloc(sizeof(t_points), info.nb_points);
 	if (points == NULL)
 		return (NULL);
@@ -76,12 +74,13 @@ int	main(int ac, char **av)
 	t_mlx		*mlx;
 	int			fd;
 
+	check_args(ac, 2);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 1)
-		return (1);
+		ft_exit_error(INVALID_FILE);
 	info = info_mapping(fd);
 	close(fd);
-	points = parse(info, ac, av);
+	points = parse(info, av);
 	close(fd);
 	if (points == NULL)
 		return (1);

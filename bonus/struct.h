@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 19:49:58 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/03 15:00:04 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/06 10:01:11 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,19 @@ typedef struct s_map
 
 typedef struct s_points
 {
-	int				x;
-	int				y;
-	int				x_c;
-	int				y_c;
-	int				z;
-	int				eol;
-	struct s_points	*next;
-}					t_points;
+	int	x;
+	int	y;
+	int	x_c;
+	int	y_c;
+	int	z;
+}		t_points;
+
+typedef struct s_event
+{
+	int			zoom;
+	float		alt_offset;
+	t_points	*points;
+}				t_event;
 
 typedef struct s_bresenham
 {
@@ -61,6 +66,7 @@ typedef struct s_mlx
 	void	*mlx;
 	void	*mlx_win;
 	t_data	img;
+	t_event	events;
 }			t_mlx;
 
 #endif
