@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   fdf_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 13:27:52 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/06 10:45:59 by ulayus           ###   ########.fr       */
+/*   Created: 2022/11/09 13:53:50 by ulayus            #+#    #+#             */
+/*   Updated: 2022/12/06 13:29:57 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#ifndef FDF_BONUS_H
+# define FDF_BONUS_H
 
-# include "utils.h"
-# include "../gnl/get_next_line.h"
-# include <math.h>
-# define ZOOM 1
-# define ALT_OFFSET 0.6
-
-void	coordinates(t_points *points, t_map info, int fd);
-void	ft_free_split(char **strs);
-t_map	info_mapping(int fd);
+# include "parsing_bonus.h"
+# include "graphic_bonus.h"
+# include <fcntl.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
 
 #endif

@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:24:41 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/06 10:42:09 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/06 19:27:40 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
-
-int	pixel_in_win(t_bresenham *data)
-{
-	if (data->x1 > WIDTH || data->y1 > HEIGHT
-		|| data->x1 < 0 || data->y1 < 0)
-		return (0);
-	return (1);
-}
+#include "utils_bonus.h"
 
 int	ft_abs(int n)
 {
@@ -62,4 +54,18 @@ void	ft_exit_error(int flag)
 	else if (flag == ALLOC_ERR)
 		write(2, ERR_COLOR"Allocation error\n"END, 36);
 	exit(1);
+}
+
+int	destroy_win(t_mlx *fdf)
+{
+	mlx_loop_end(fdf->mlx);
+	mlx_clear_window(fdf->mlx, fdf->mlx_win);
+	mlx_destroy_window(fdf->mlx, fdf->mlx_win);
+	mlx_destroy_display(fdf->mlx);
+	free(fdf->events->points);
+	free(fdf->events);
+	free(fdf->mlx);
+	free(fdf);
+	exit (0);
+	return (1);
 }

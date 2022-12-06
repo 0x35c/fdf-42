@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:07:18 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/02 16:52:32 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/06 15:59:42 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	draw_lines(t_points p1, t_points p2, t_mlx win)
 	t_bresenham	*data;
 	int			color;
 
-	color = 0x0000ff + (0xff0000 - (0xff0000 * p2.z * 20));
+	color = 0x0000ff + (0xff0000 - (0xff0000 * p2.z * 5));
 	data = init_values(p1, p2);
 	if (!data)
 		return ;

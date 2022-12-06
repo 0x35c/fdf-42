@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 19:34:16 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/06 10:37:43 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/06 13:57:00 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define UTILS_H
 
 # include "struct.h"
-# include "../libft/libft.h"
+# include "../libs/libft/libft.h"
 # include <limits.h>
 # define WIDTH 900
 # define HEIGHT 900

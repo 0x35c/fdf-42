@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:29:58 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/06 09:54:11 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/06 17:15:40 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "parsing_bonus.h"
 
 void	ft_new_point(t_points *point, char *z, int x, int y)
 {
-	point->z = ft_atoi(z); //* ALT_OFFSET;
-	point->x_c = x; //((x * ZOOM - y * ZOOM) * cos(0.6)) + WIDTH / 2;
-	point->y_c = y; //((x * ZOOM + y * ZOOM) * sin(0.6) - point->z) + 100;
+	point->z_c = ft_atoi(z);
+	point->x_c = x;
+	point->y_c = y;
 }
 
 void	ft_free_split(char **strs)

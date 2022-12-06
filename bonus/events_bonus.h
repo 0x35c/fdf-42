@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graphic.h                                          :+:      :+:    :+:   */
+/*   events_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 19:34:16 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/04 14:03:29 by ulayus           ###   ########.fr       */
+/*   Created: 2022/12/06 09:58:40 by ulayus            #+#    #+#             */
+/*   Updated: 2022/12/06 17:58:45 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GRAPHIC_H
-# define GRAPHIC_H
+#ifndef EVENTS_BONUS_H
+# define EVENTS_BONUS_H
 
-# include "utils.h"
+# include "utils_bonus.h"
+# include "graphic_bonus.h"
+# include <X11/keysym.h>
+# include <X11/X.h>
 
-void	draw_lines(t_points p1, t_points p2, t_mlx win);
-void	draw_grid(t_mlx *mlx, t_map info, t_points *points);
+void	convert_point(t_event *events, t_points *point);
+void	*ft_new_image(t_mlx *fdf);
+int		handle_key(int key, t_mlx *fdf);
 
 #endif

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   struct_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 19:49:58 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/06 10:01:11 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/06 18:54:28 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#ifndef STRUCT_BONUS_H
+# define STRUCT_BONUS_H
 
 typedef struct s_data
 {
@@ -31,18 +31,22 @@ typedef struct s_map
 
 typedef struct s_points
 {
-	int	x;
-	int	y;
-	int	x_c;
-	int	y_c;
-	int	z;
+	int		x;
+	int		y;
+	float	z;
+	int		x_c;
+	int		y_c;
+	int		z_c;
 }		t_points;
 
 typedef struct s_event
 {
 	int			zoom;
-	float		alt_offset;
+	int			x_os;
+	int			y_os;
+	float		alt_os;
 	t_points	*points;
+	t_map		info;
 }				t_event;
 
 typedef struct s_bresenham
@@ -66,7 +70,7 @@ typedef struct s_mlx
 	void	*mlx;
 	void	*mlx_win;
 	t_data	img;
-	t_event	events;
+	t_event	*events;
 }			t_mlx;
 
 #endif

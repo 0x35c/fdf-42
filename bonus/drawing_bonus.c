@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawing.c                                          :+:      :+:    :+:   */
+/*   drawing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 18:07:18 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/02 16:52:32 by ulayus           ###   ########.fr       */
+/*   Created: 2022/12/06 17:30:01 by ulayus            #+#    #+#             */
+/*   Updated: 2022/12/06 19:27:04 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "graphic_bonus.h"
 
 t_bresenham	*init_values(t_points p1, t_points p2)
 {
@@ -38,15 +38,18 @@ t_bresenham	*init_values(t_points p1, t_points p2)
 	return (data);
 }
 
-void	bresenham_1(t_bresenham *data, t_mlx win, int color)
+void	bresenham_1(t_bresenham *data, t_mlx *fdf, int color)
 {
 	int	i;
 
 	i = 0;
 	while (i <= data->ref_dx)
 	{
-		if (pixel_in_win(data))
-			ft_mlx_pixel_put(&(win.img), data->x1, data->y1, color);
+		if (!(data->x1 > WIDTH || data->y1 > HEIGHT
+				|| data->x1 < 0 || data->y1 < 0))
+		{
+			ft_mlx_pixel_put(&(fdf->img), data->x1, data->y1, color);
+		}
 		i++;
 		data->x1 += data->x_incr;
 		data->ex -= data->dy;
@@ -58,15 +61,18 @@ void	bresenham_1(t_bresenham *data, t_mlx win, int color)
 	}
 }
 
-void	bresenham_2(t_bresenham *data, t_mlx win, int color)
+void	bresenham_2(t_bresenham *data, t_mlx *fdf, int color)
 {
 	int	i;
 
 	i = 0;
 	while (i <= data->ref_dy)
 	{
-		if (pixel_in_win(data))
-			ft_mlx_pixel_put(&(win.img), data->x1, data->y1, color);
+		if (!(data->x1 > WIDTH || data->y1 > HEIGHT
+				|| data->x1 < 0 || data->y1 < 0))
+		{
+			ft_mlx_pixel_put(&(fdf->img), data->x1, data->y1, color);
+		}
 		i++;
 		data->y1 += data->y_incr;
 		data->ey -= data->dx;
@@ -78,36 +84,49 @@ void	bresenham_2(t_bresenham *data, t_mlx win, int color)
 	}
 }
 
-void	draw_lines(t_points p1, t_points p2, t_mlx win)
+void	draw_line(t_points p1, t_points p2, t_mlx *fdf)
 {
 	t_bresenham	*data;
 	int			color;
 
-	color = 0x0000ff + (0xff0000 - (0xff0000 * p2.z * 20));
+	if (p2.z)
+		color = 0x00abec + 0x0000ff * p2.z * 3;
+	else
+		color = 0xb0c4ee;
 	data = init_values(p1, p2);
 	if (!data)
 		return ;
 	if (data->ref_dx > data->ref_dy)
-		bresenham_1(data, win, color);
+		bresenham_1(data, fdf, color);
 	else
-		bresenham_2(data, win, color);
+		bresenham_2(data, fdf, color);
 	free(data);
 }
 
-void	draw_grid(t_mlx *mlx, t_map info, t_points *points)
+void	draw_grid(t_mlx *fdf)
 {
-	int	i;
+	const t_map	info = fdf->events->info;
+	int			i;
 
 	i = 0;
 	while (i + 1 < info.nb_points)
 	{
 		if ((i + 1) % info.nb_columns < info.nb_columns
 			&& (i + 1) % info.nb_columns)
-			draw_lines(points[i], points[i + 1], *mlx);
+		{
+			convert_point(fdf->events, &(fdf->events->points[i]));
+			convert_point(fdf->events, &(fdf->events->points[i + 1]));
+			draw_line(fdf->events->points[i], fdf->events->points[i + 1], fdf);
+		}
 		if (i + info.nb_columns < info.nb_points)
-			draw_lines(points[i], points[i + info.nb_columns], *mlx);
+		{
+			convert_point(fdf->events, &(fdf->events->points[i]));
+			convert_point(fdf->events, &(fdf->events->points[i + 1]));
+			draw_line(fdf->events->points[i],
+				fdf->events->points[i + info.nb_columns], fdf);
+		}
 		i++;
 	}
-	free(points);
-	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img.img, 0, 0);
+	mlx_put_image_to_window(fdf->mlx, fdf->mlx_win, fdf->img.img, 0, 0);
+	mlx_destroy_image(fdf->mlx, fdf->img.img);
 }

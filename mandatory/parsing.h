@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 13:27:52 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/06 10:29:33 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/06 13:57:15 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PARSING_H
 
 # include "utils.h"
-# include "../gnl/get_next_line.h"
+# include "../libs/gnl/get_next_line.h"
 # include <math.h>
 # define ZOOM 1
 # define ALT_OFFSET 0.6
