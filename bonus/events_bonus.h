@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 09:58:40 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/06 17:58:45 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/07 09:26:38 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 void	convert_point(t_event *events, t_points *point);
 void	*ft_new_image(t_mlx *fdf);
+void	display_grid(t_mlx *fdf);
 int		handle_key(int key, t_mlx *fdf);
 
 #endif

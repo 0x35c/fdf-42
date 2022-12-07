@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 09:54:19 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/06 19:24:55 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/07 09:26:51 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ void	*ft_new_image(t_mlx *fdf)
 	return (fdf->img.img);
 }
 
+void	display_grid(t_mlx *fdf)
+{
+	fdf->img.img = ft_new_image(fdf);
+	draw_grid(fdf);
+	fdf->img.img = ft_new_image(fdf);
+	draw_grid(fdf);
+}
+
 int	handle_key(int key, t_mlx *fdf)
 {
 	if (key == XK_Escape)
@@ -59,10 +67,7 @@ int	handle_key(int key, t_mlx *fdf)
 			fdf->events->alt_os += 0.05;
 		if (key == '7')
 			fdf->events->alt_os -= 0.05;
-		fdf->img.img = ft_new_image(fdf);
-		draw_grid(fdf);
-		fdf->img.img = ft_new_image(fdf);
-		draw_grid(fdf);
+		display_grid(fdf);
 	}
 	return (0);
 }

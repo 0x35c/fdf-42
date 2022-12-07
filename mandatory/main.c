@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:32:03 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/06 10:42:57 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/07 09:42:22 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	destroy_win(t_mlx *mlx)
 {
 	mlx_loop_end(mlx->mlx);
 	mlx_destroy_image(mlx->mlx, mlx->img.img);
+	mlx_clear_window(mlx->mlx, mlx->mlx_win);
 	mlx_destroy_window(mlx->mlx, mlx->mlx_win);
 	mlx_destroy_display(mlx->mlx);
 	free(mlx->mlx);

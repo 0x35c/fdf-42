@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:51:35 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/06 19:21:55 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/07 09:30:33 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,12 @@ t_mlx	*win_init(void)
 	if (fdf->mlx_win == NULL)
 		return (NULL);
 	fdf->events = malloc(sizeof(t_event));
-	fdf->img.img = ft_new_image(fdf);
 	if (fdf->events == NULL)
 		return (NULL);
 	fdf->events->zoom = 1;
 	fdf->events->x_os = WIDTH / 2;
 	fdf->events->y_os = 100;
-	fdf->events->alt_os = 0.4;
+	fdf->events->alt_os = 1;
 	return (fdf);
 }
 
@@ -59,6 +58,8 @@ int	main(int ac, char **av)
 
 	check_args(ac, 2);
 	fdf = win_init();
+	if (fdf == NULL)
+		ft_exit_error(ALLOC_ERR);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 1)
 		ft_exit_error(INVALID_FILE);
@@ -67,10 +68,7 @@ int	main(int ac, char **av)
 	fdf->events->points = parse(fdf->events->info, av);
 	if (fdf->events->points == NULL)
 		ft_exit_error(ALLOC_ERR);
-	close(fd);
-	if (fdf == NULL)
-		ft_exit_error(ALLOC_ERR);
-	draw_grid(fdf);
+	display_grid(fdf);
 	mlx_hook(fdf->mlx_win, KeyPress, KeyPressMask, &handle_key, fdf);
 	mlx_hook(fdf->mlx_win, DestroyNotify, StructureNotifyMask,
 		&destroy_win, fdf);
