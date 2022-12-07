@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:51:35 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/07 09:30:33 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/07 16:21:58 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ int	main(int ac, char **av)
 	int			fd;
 
 	check_args(ac, 2);
-	fdf = win_init();
-	if (fdf == NULL)
-		ft_exit_error(ALLOC_ERR);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 1)
 		ft_exit_error(INVALID_FILE);
+	fdf = win_init();
+	if (fdf == NULL)
+		ft_exit_error(ALLOC_ERR);
 	fdf->events->info = info_mapping(fd);
 	close(fd);
 	fdf->events->points = parse(fdf->events->info, av);

@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:32:03 by ulayus            #+#    #+#             */
-/*   Updated: 2022/12/07 09:42:22 by ulayus           ###   ########.fr       */
+/*   Updated: 2022/12/07 16:21:15 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,10 @@ int	main(int ac, char **av)
 	points = parse(info, av);
 	close(fd);
 	if (points == NULL)
-		return (1);
+		ft_exit_error(ALLOC_ERR);
 	mlx = win_init();
 	if (mlx == NULL)
-		return (1);
+		ft_exit_error(ALLOC_ERR);
 	draw_grid(mlx, info, points);
 	mlx_hook(mlx->mlx_win, KeyRelease, KeyReleaseMask, &handle_key, mlx);
 	mlx_hook(mlx->mlx_win, DestroyNotify, StructureNotifyMask,
