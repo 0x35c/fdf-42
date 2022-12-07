@@ -6,7 +6,7 @@
 #    By: ulayus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/30 11:40:22 by ulayus            #+#    #+#              #
-#    Updated: 2022/12/06 16:20:25 by ulayus           ###   ########.fr        #
+#    Updated: 2022/12/07 09:55:31 by ulayus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,28 +43,38 @@ MLX = -Llibs/minilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm 
 
 ${NAME}: ${OBJ}
 	@make -C libs/libft > /dev/null
-	@printf '\x1b[38;2;50;205;50mLibft compiled !\n\x1b[0m'
+	@printf '\x1b[38;2;50;205;50mLibft compiled 🤓\n\x1b[0m'
 	@make -C libs/minilibx-linux > /dev/null
-	@printf '\x1b[38;2;50;205;50mMiniLibX compiled !\n\x1b[0m'
+	@printf '\x1b[38;2;50;205;50mMiniLibX compiled 🤓\n\x1b[0m'
 	$(CC) ${OBJ} -o ${NAME} $(MLX) $(LIBS)
-	@printf '\e[5m\x1b[38;2;50;205;50mWireframe compiled !\n\x1b[0m\e[0m'
+	@printf '\x1b[38;2;50;205;50mWireframe compiled 🤓\n\x1b[0m'
 
 ${NAME}_B: ${OBJB}
 	@make -C libs/libft > /dev/null
-	@printf '\x1b[38;2;50;205;50mLibft compiled !\n\x1b[0m'
+	@printf '\x1b[38;2;50;205;50mLibft compiled 🤓\n\x1b[0m'
 	@make -C libs/minilibx-linux > /dev/null
-	@printf '\x1b[38;2;50;205;50mMiniLibX compiled !\n\x1b[0m'
+	@printf '\x1b[38;2;50;205;50mMiniLibX compiled 🤓\n\x1b[0m'
 	$(CC) ${OBJB} -o ${NAME}_b $(MLX) $(LIBS)
-	@printf '\e[5m\x1b[38;2;50;205;50mBonus Wireframe compiled !\n\x1b[0m\e[0m'
+	@printf '\x1b[38;2;50;205;50mBonus Wireframe compiled 🤓\n\x1b[0m'
 
 clean:
 	@rm -f $(OBJ)
-	@printf '\x1b[38;2;255;140;0mObjects removed !\n\x1b[0m'
+	@printf '\e[5m❌ \e[0m\x1b[38;2;255;140;0mObjects removed\x1b[0m\e[5m ❌\n\e[0m'
 
 fclean: clean
 	@rm -f ${NAME} 
-	@printf '\x1b[38;2;200;0;20mBinary removed !\n\x1b[0m'
+	@printf '\e[5m🚨 \e[0m\x1b[38;2;200;0;20mBinary removed\x1b[0m\e[5m 🚨\n\e[0m'
 
-re: all fclean
+clean_b:
+	@rm -f $(OBJ)
+	@printf '\e[5m❌ \e[0m\x1b[38;2;255;140;0mBonus objects removed\x1b[0m\e[5m ❌\n\e[0m'
+
+fclean_b: clean
+	@rm -f ${NAME} 
+	@printf '\e[5m🚨 \e[0m\x1b[38;2;200;0;20mBonus binary removed\x1b[0m\e[5m 🚨\n\e[0m'
+
+re: fclean all
+
+re_b: fclean_b bonus
 
 .PHONY: all clean fclean re
