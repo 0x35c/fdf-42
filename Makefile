@@ -6,7 +6,7 @@
 #    By: ulayus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/30 11:40:22 by ulayus            #+#    #+#              #
-#    Updated: 2022/12/07 09:55:31 by ulayus           ###   ########.fr        #
+#    Updated: 2022/12/09 13:28:55 by ulayus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,11 +66,11 @@ fclean: clean
 	@printf '\e[5m🚨 \e[0m\x1b[38;2;200;0;20mBinary removed\x1b[0m\e[5m 🚨\n\e[0m'
 
 clean_b:
-	@rm -f $(OBJ)
+	@rm -f $(OBJB)
 	@printf '\e[5m❌ \e[0m\x1b[38;2;255;140;0mBonus objects removed\x1b[0m\e[5m ❌\n\e[0m'
 
-fclean_b: clean
-	@rm -f ${NAME} 
+fclean_b: clean_b
+	@rm -f ${NAME}_b
 	@printf '\e[5m🚨 \e[0m\x1b[38;2;200;0;20mBonus binary removed\x1b[0m\e[5m 🚨\n\e[0m'
 
 re: fclean all
